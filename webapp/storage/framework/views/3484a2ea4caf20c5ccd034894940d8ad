@@ -1,0 +1,19 @@
+ <?php $__env->startSection('title'); ?> <?php echo e($photo_album->name); ?> :: @parent  <?php $__env->stopSection(); ?> <?php $__env->startSection('content'); ?>
+<h3><?php echo e($photo_album->name); ?></h3>
+
+<div id="mygallery">
+	<?php foreach($photos as $item): ?> 
+	<a
+		href="<?php echo e('../../appfiles/photoalbum/'.$photo_album->folder_id.'/'.$item->filename); ?>"
+		data-lightbox="roadtrip"> <img alt="<?php echo e($item->name); ?>"
+		src="<?php echo e('../../appfiles/photoalbum/'.$photo_album->folder_id.'/thumbs/'.$item->filename); ?>" />
+	</a> 
+	<?php endforeach; ?>
+</div>
+<?php $__env->stopSection(); ?> <?php $__env->startSection('scripts'); ?>
+<script>
+        $("#mygallery").justifiedGallery();
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

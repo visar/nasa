@@ -1,0 +1,16 @@
+<?php $__env->startSection('content'); ?>
+    <div class="row">
+            <?php echo $__env->yieldContent('top'); ?>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <?php echo $__env->yieldContent('sidebar'); ?>
+        </div>
+        <?php /*<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">*/ ?>
+        <div class="col-sm-9 col-md-10 main">
+            <?php echo $__env->yieldContent('main'); ?>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

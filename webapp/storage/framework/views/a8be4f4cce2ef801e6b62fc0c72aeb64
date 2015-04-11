@@ -1,0 +1,62 @@
+<?php /* Web site Title */ ?>
+<?php $__env->startSection('title'); ?> <?php echo e(trans("admin/users.users")); ?> :: @parent
+<?php $__env->stopSection(); ?>
+
+<?php /* Content */ ?>
+<?php $__env->startSection('main'); ?>
+    <div class="page-header">
+        <h3>
+            <?php echo e(trans("admin/users.users")); ?>
+
+            <div class="pull-right">
+                <div class="pull-right">
+                    <a href="<?php echo e(URL::to('admin/users/create')); ?>"
+                       class="btn btn-sm  btn-primary iframe"><span
+                                class="glyphicon glyphicon-plus-sign"></span> <?php echo e(trans("admin/modal.new")); ?></a>
+                </div>
+            </div>
+        </h3>
+    </div>
+
+    <table id="table" class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th><?php echo e(trans("admin/users.name")); ?></th>
+            <th><?php echo e(trans("admin/users.email")); ?></th>
+            <th><?php echo e(trans("admin/users.active_user")); ?></th>
+            <th><?php echo e(trans("admin/admin.created_at")); ?></th>
+            <th><?php echo e(trans("admin/admin.action")); ?></th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+<?php $__env->stopSection(); ?>
+
+<?php /* Scripts */ ?>
+<?php $__env->startSection('scripts'); ?>
+    @parent
+    <script type="text/javascript">
+        var oTable;
+        $(document).ready(function () {
+            oTable = $('#table').dataTable({
+                "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+                "sPaginationType": "bootstrap",
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "<?php echo e(URL::to('admin/users/data/')); ?>",
+                "fnDrawCallback": function (oSettings) {
+                    $(".iframe").colorbox({
+                        iframe: true,
+                        width: "80%",
+                        height: "80%",
+                        onClosed: function () {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
